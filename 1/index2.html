@@ -1,0 +1,88 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Submission</title>
+</head>
+<body>
+
+<div id="container">
+    <div class="row">
+        <input type="text" class="inputText">
+        <button onclick="addRow(this)">Add</button>
+        <button onclick="submitText(this)">Submit</button>
+        <span class="submittedText"></span>
+    </div>
+</div>
+
+<script>
+function submitText(button) {
+    var row = button.parentNode;
+    var inputText = row.querySelector('.inputText').value;
+    var submittedText = row.querySelector('.submittedText');
+    submittedText.textContent = inputText;
+    row.querySelector('.inputText').value = ''; 
+}
+
+function addRow(button) {
+    var container = document.getElementById('container');
+    var row = button.parentNode;
+    var newRow = row.cloneNode(true);
+    newRow.querySelector('.inputText').value = ''; 
+    newRow.querySelector('.submittedText').textContent = ''; 
+    container.appendChild(newRow);
+}
+</script>
+
+</body>
+</html>
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Submission</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <div id="container">
+        <div class="row">
+            <input type="text" class="inputText">
+            <button class="addBtn">Add</button>
+            <button class="submitBtn">Submit</button>
+            <span class="submittedText"></span>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.submitBtn', function () {
+                var row = $(this).closest('.row');
+                var inputText = row.find('.inputText').val();
+                var submittedText = row.find('.submittedText');
+                submittedText.text(inputText);
+                row.find('.inputText').val('');
+            });
+
+            $(document).on('click', '.addBtn', function () {
+                var container = $('#container');
+                var row = $(this).closest('.row');
+                var newRow = row.clone();
+                newRow.find('.inputText').val('');
+                newRow.find('.submittedText').text('');
+                container.append(newRow);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

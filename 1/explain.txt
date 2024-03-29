@@ -1,0 +1,70 @@
+1.
+ 
+### HTML Structure:
+- `<!DOCTYPE html>`: This declaration specifies the document type and version of HTML being used, which is HTML5 in this case.
+- `<html lang="en">`: The opening tag for the HTML document, specifying the language of the document as English.
+- `<head>`: The head section of the HTML document, which contains metadata and links to external resources.
+  - `<meta charset="UTF-8">`: This meta tag specifies the character encoding for the document as UTF-8, which supports a wide range of characters.
+  - `<meta name="viewport" content="width=device-width, initial-scale=1.0">`: This meta tag sets the viewport properties for responsive design on various devices.
+  - `<title>Current Time</title>`: The title of the HTML document displayed on the browser tab.
+  - `<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>`: This script tag includes the jQuery library from the jQuery CDN (Content Delivery Network).
+- `<body>`: The body section of the HTML document, which contains the visible content.
+  - `<h1>Current Time</h1>`: This heading displays the title of the page, "Current Time".
+  - `<p id="time12"></p>`: This paragraph element will display the current time in 12-hour format.
+  - `<p id="time24"></p>`: This paragraph element will display the current time in 24-hour format.
+  - The JavaScript code is included within `<script>` tags inside the body section to ensure it executes after the HTML content has loaded.
+
+### JavaScript (with jQuery):
+- `$(document).ready(function(){ ... });`: This jQuery function ensures that the enclosed code executes only after the DOM (Document Object Model) has been fully loaded.
+- `function updateTime() { ... }`: This function retrieves the current time, formats it in both 12-hour and 24-hour formats using the `toLocaleTimeString()` method, and updates the text content of the HTML elements with the formatted times.
+- `updateTime();`: This line calls the `updateTime()` function once when the page loads to display the current time immediately.
+- `setInterval(updateTime, 1000);`: This function sets up an interval to call the `updateTime()` function every second (1000 milliseconds), ensuring that the displayed time updates in real-time.
+
+2.
+
+- `<span class="submittedText"></span>`: Span element to display the submitted text with the class "submittedText".
+In HTML, the <span> element is an inline container used to group and apply styles to inline elements or parts of text within a larger block of content.
+It does not add any semantic meaning to the content but allows you to target specific parts of the text for styling or scripting purposes.
+
+### JavaScript (with jQuery):
+- `$(document).on('click', '.submitBtn', function() { ... });`: jQuery event handler for the click event on elements with the class "submitBtn".
+  - `$(this).closest('.row')`: Selects the closest ancestor element with the class "row" relative to the clicked button.
+  - `row.find('.inputText').val()`: Finds the input element within the row and retrieves its value.
+  - `row.find('.submittedText')`: Finds the span element within the row.
+  - `submittedText.text(inputText)`: Sets the text content of the span element to the submitted text.
+  - `row.find('.inputText').val('')`: Resets the value of the input field to an empty string.
+- `$(document).on('click', '.addBtn', function() { ... });`: jQuery event handler for the click event on elements with the class "addBtn".
+  - `$('#container')`: Selects the container div element.
+  - `$(this).closest('.row')`: Selects the closest ancestor element with the class "row" relative to the clicked button.
+  - `newRow.find('.inputText').val('')`: Resets the value of the input field in the new row to an empty string.
+  - `newRow.find('.submittedText').text('')`: Clears the text content of the span element in the new row.
+  - `container.append(newRow)`: Appends the new row to the container.
+
+3.
+
+  - External CSS links for styling: 
+    - `flatpickr.min.css`: Stylesheet for the flatpickr date-time picker library.
+    - `all.min.css`: Stylesheet for Font Awesome icons.
+- `<body>`: Body section of the HTML document, containing the visible content.
+  - `<div id="container">`: Div element with the id "container" to hold the input elements and countdown.
+    - Two input containers with text input fields for date and time selection, each containing:
+      - `<input type="text">`: Text input fields for date and time selection.
+      - `<span>` elements with Font Awesome icons for the calendar and clock, acting as clickable icons.
+      - `<button id="startButton">Start</button>`: Button to start the countdown timer.
+    - `<div id="countdown"></div>`: Div element to display the countdown timer.
+
+### CSS:
+- Styles for `.input-container`, `.calendar-icon`, and `.clock-icon` classes define the positioning and appearance of input containers and icon elements.
+- The `#startButton` style defines the positioning of the start button.
+
+### JavaScript (with jQuery):
+- The jQuery library is included from a CDN (`https://code.jquery.com/jquery-3.6.0.min.js`).
+- `$(document).ready(function() { ... });`: jQuery function ensuring that the enclosed code executes only after the DOM has been fully loaded.
+- Event listeners are attached to the calendar and clock icons using jQuery's `click()` function.
+- When the calendar or clock icon is clicked:
+  - The flatpickr date-time picker is initialized for the respective input field (`#inputTextDate` or `#inputTextTime`) with specific configurations.
+  - The `open()` method is called to open the date-time picker.
+- When the start button is clicked:
+  - The countdown timer function `updateCountdown()` is defined, which calculates the remaining time based on the selected date and time.
+  - The countdown timer function is called immediately to display the remaining time.
+  - An interval (`setInterval()`) is set to call the countdown timer function every second to update the remaining time dynamically.

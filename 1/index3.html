@@ -1,0 +1,263 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Textbox with Calendar and Time Pickers</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    .input-container {
+        position: relative;
+        display: inline-block;
+    }
+    .input-container input[type="text"] {
+        padding-right: 30px; 
+    }
+    .calendar-icon, .clock-icon {
+        position: absolute;
+        top: 50%;
+        color: #aaa;
+        cursor: pointer;
+        z-index: 1; 
+    }
+    .calendar-icon {
+        right: 10px;
+        transform: translateY(-50%);
+    }
+    .clock-icon {
+      right: 65px;
+      transform: translateY(-50%);
+      margin-top: 0px;
+    }
+    #startButton {
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+</style>
+</head>
+<body>
+
+<div id="container">
+    <div class="input-container">
+        <input type="text" id="inputTextDate" placeholder="Select Date">
+        <span class="calendar-icon" id="calendarIcon"><i class="fas fa-calendar-alt"></i></span>
+    </div>
+    <div class="input-container">
+        <input type="text" id="inputTextTime" placeholder="Select Time">
+        <span class="clock-icon" id="clockIcon"><i class="far fa-clock"></i></span>
+        <button id="startButton">Start</button>
+    </div>
+    <div id="countdown"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+document.getElementById("calendarIcon").addEventListener("click", function() {
+    flatpickr("#inputTextDate", {
+        dateFormat: "Y-m-d",
+    }).open();
+});
+
+document.getElementById("clockIcon").addEventListener("click", function() {
+    flatpickr("#inputTextTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+    }).open();
+});
+
+document.getElementById("startButton").addEventListener("click", function() {
+    var countdownElement = document.getElementById("countdown");
+
+    function updateCountdown() {
+    var selectedDateTime = new Date(document.getElementById("inputTextDate").value + " " + document.getElementById("inputTextTime").value);
+    var now = new Date();
+
+    var timeDifference = selectedDateTime.getTime() - now.getTime();
+
+    if (timeDifference <= 0) {
+        countdownElement.innerHTML = "Timeout";
+        return;
+    }
+
+    var seconds = Math.floor(timeDifference / 1000);
+    var minutes = Math.floor(seconds / 60);
+    var hours = Math.floor(minutes / 60);
+    var days = Math.floor(hours / 24);
+    var months = Math.floor(days / 30);
+    var years = Math.floor(months / 12);
+
+    seconds %= 60;
+    minutes %= 60;
+    hours %= 24;
+    days %= 30;
+    months %= 12;
+
+    var remainingTime;
+
+    if (years > 0) {
+        remainingTime = years + " years, " + months + " months, " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+    } else if (months > 0) {
+        remainingTime = months + " months, " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+    } else if (days > 0) {
+        remainingTime = days + " days, " + hours + " hours, " + minutes + " minutes, "+ seconds + " seconds";
+    } else if (hours > 0) {
+        remainingTime = hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+    } else if (minutes > 0) {
+        remainingTime = minutes + " minutes, "+ seconds + " seconds";
+    } else {
+        remainingTime = seconds + " seconds";
+    }
+
+    countdownElement.innerHTML = "Remaining time: " + remainingTime;
+    console.log(remainingTime,  seconds)
+}
+
+    updateCountdown(); // Update countdown immediately
+    var countdownInterval = setInterval(updateCountdown, 1000); // Update countdown every second
+    // Stop countdown after 10 seconds
+    // setTimeout(function() {
+    //     clearInterval(countdownInterval);
+    //     countdownElement.innerHTML = "Countdown stopped after 10 seconds.";
+    // }, 10000);
+});
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Textbox with Calendar and Time Pickers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .input-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .input-container input[type="text"] {
+            padding-right: 30px;
+        }
+
+        .calendar-icon,
+        .clock-icon {
+            position: absolute;
+            top: 50%;
+            color: #aaa;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .calendar-icon {
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        .clock-icon {
+            right: 65px;
+            transform: translateY(-50%);
+            margin-top: 0px;
+        }
+
+        #startButton {
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <div class="input-container">
+            <input type="text" id="inputTextDate" placeholder="Select Date">
+            <span class="calendar-icon" id="calendarIcon"><i class="fas fa-calendar-alt"></i></span>
+        </div>
+        <div class="input-container">
+            <input type="text" id="inputTextTime" placeholder="Select Time">
+            <span class="clock-icon" id="clockIcon"><i class="far fa-clock"></i></span>
+            <button id="startButton">Start</button>
+        </div>
+        <div id="countdown"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#calendarIcon").click(function () {
+                flatpickr("#inputTextDate", {
+                    dateFormat: "Y-m-d",
+                }).open();
+            });
+
+            $("#clockIcon").click(function () {
+                flatpickr("#inputTextTime", {
+                    enableTime: true,
+                    noCalendar: true,
+                    dateFormat: "H:i",
+                }).open();
+            });
+
+            $("#startButton").click(function () {
+                var countdownElement = $("#countdown");
+
+                function updateCountdown() {
+                    var selectedDateTime = new Date($("#inputTextDate").val() + " " + $("#inputTextTime").val());
+                    var now = new Date();
+
+                    var timeDifference = selectedDateTime.getTime() - now.getTime();
+
+                    if (timeDifference <= 0) {
+                        countdownElement.html("Timeout");
+                        return;
+                    }
+
+                    var seconds = Math.floor(timeDifference / 1000);
+                    var minutes = Math.floor(seconds / 60);
+                    var hours = Math.floor(minutes / 60);
+                    var days = Math.floor(hours / 24);
+                    var months = Math.floor(days / 30);
+                    var years = Math.floor(months / 12);
+
+                    seconds %= 60;
+                    minutes %= 60;
+                    hours %= 24;
+                    days %= 30;
+                    months %= 12;
+
+                    var remainingTime;
+
+                    if (years > 0) {
+                        remainingTime = years + " years, " + months + " months, " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                    } else if (months > 0) {
+                        remainingTime = months + " months, " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                    } else if (days > 0) {
+                        remainingTime = days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                    } else if (hours > 0) {
+                        remainingTime = hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+                    } else if (minutes > 0) {
+                        remainingTime = minutes + " minutes, " + seconds + " seconds";
+                    } else {
+                        remainingTime = seconds + " seconds";
+                    }
+
+                    countdownElement.html("Remaining time: " + remainingTime);
+                }
+
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
